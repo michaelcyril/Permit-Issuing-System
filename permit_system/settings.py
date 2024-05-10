@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#s=cvoz#4g9=s-b=yc*p5@=m5u1ufbu4=sg4z_89be^=id+bcg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,6 +88,21 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# DATABASES = {
+#   'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': 'permits',
+#     'USER': 'postgres',
+#     'PASSWORD': '2024d@tingApp',
+#     'HOST': '157.245.109.105',
+#     'PORT': '5432',
+#     'OPTIONS': {'sslmode': 'require','client_encoding': 'UTF8'},
+#     'ATOMIC_REQUESTS': True,
+#     'CHARSET': 'UTF-8',
+#   }
+# }
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

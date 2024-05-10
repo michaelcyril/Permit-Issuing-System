@@ -15,8 +15,12 @@ class RequestPermitView(APIView):
 
     def post(self, request):
         data = request.data
-        serialized = self.post_serializer_class(data)
+        print(data)
+        serialized = self.post_serializer_class(data=data)
+        # print("ddddddddd")
+        
         if serialized.is_valid():
+            # print(serialized.is_valid())
             serialized.save()
             return Response({"save": True})
         return Response({"save": False, "errors": serialized.errors})
@@ -44,10 +48,15 @@ class ChangePermitStatusView(APIView):
             if data['status'] == "PERMITED":
                 queryset.issued_by = self.user_model.objects.get(id=data['request_user'])
                 queryset.issued_at = now
+                queryset.status = data['status']
+                queryset.save()
+                
                 return Response({"change": True, "message": "Permit successful"})
             elif data['status'] == "CANCELED":
                 queryset.canceled_by =  self.user_model.objects.get(id=data['request_user'])
+                queryset.status = data['status']
                 queryset.canceled_at = now
+                queryset.save()
                 return Response({"change": True, "message": "Cancel successful"})
             else:
                 return Response({"change": False})
@@ -68,7 +77,10 @@ class GetPermitView(APIView):
     user_model = User
 
     def get(self, request):
-        querset = self.model.all()
+        querset = self.model.objects.all()
+        print("querset")
+        
+        print(querset)
         serialized = self.get_serializer_class(instance=querset, many=True)
         return Response(serialized.data)
 

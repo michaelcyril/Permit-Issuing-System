@@ -11,7 +11,7 @@ class User(AbstractUser):
     )
     USERTYPE = (
         ("ADMIN", "Admin"),
-        ("PERMIT_OFFICER", "Permit Officer"),
+        ("PERMIT", "Permit Officer"),
         ("AGENT", "Agent"),
         ("NORMAL", "Normal"),
     )

@@ -13,15 +13,15 @@ class Permit(models.Model):
         ("SELLING", "Selling"),
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    issued_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="permit_issued_by")
-    issued_at = models.DateTimeField()
-    canceled_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="permit_canceled_by")
-    canceled_at = models.DateTimeField()
+    issued_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="permit_issued_by",null=True)
+    issued_at = models.DateTimeField(null=True)
+    canceled_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="permit_canceled_by",null=True)
+    canceled_at = models.DateTimeField(null=True)
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="who_request_permit")
     livestock_number = models.IntegerField()
     permit_number = models.CharField(max_length=250, null=True, blank=True)
     permit_typec = models.CharField(max_length=250, choices=PERMIT_TYPE, null=True, blank=True)
-    status = models.CharField(max_length=250, choices=STATUS, null=True, blank=True)
+    status = models.CharField(max_length=250, choices=STATUS,default="PENDING" ,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

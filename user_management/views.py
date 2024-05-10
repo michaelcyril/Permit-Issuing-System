@@ -49,6 +49,12 @@ class LoginView(APIView):
         email = request.data.get('email')
         password = request.data.get('password')
         user = authenticate(email=email, password=password)
+        print(request.data)
+        
+        print(email)
+        print(password)
+        
+        print(user)
         if user is not None:
             login(request, user)
             user_id = User.objects.get(email=email)
@@ -61,9 +67,11 @@ class LoginView(APIView):
             }
             return Response(response)
         if user is None:
+            
             response = {
                 'login': False,
                 'msg': 'User doesnot exist',
+                # 'msg':user
             }
             return Response(response)
         else:
