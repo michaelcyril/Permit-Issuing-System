@@ -82,27 +82,27 @@ AUTH_USER_MODEL = 'user_management.User'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
 # DATABASES = {
-#   'default': {
-#     'ENGINE': 'django.db.backends.postgresql',
-#     'NAME': 'permits',
-#     'USER': 'postgres',
-#     'PASSWORD': '2024d@tingApp',
-#     'HOST': '157.245.109.105',
-#     'PORT': '5432',
-#     'OPTIONS': {'sslmode': 'require','client_encoding': 'UTF8'},
-#     'ATOMIC_REQUESTS': True,
-#     'CHARSET': 'UTF-8',
-#   }
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'permits',
+    'USER': 'postgres',
+    'PASSWORD': '2024d@tingApp',
+    'HOST': '157.245.109.105',
+    'PORT': '5432',
+    'OPTIONS': {'sslmode': 'require','client_encoding': 'UTF8'},
+    'ATOMIC_REQUESTS': True,
+    'CHARSET': 'UTF-8',
+  }
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
