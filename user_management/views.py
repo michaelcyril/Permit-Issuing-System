@@ -102,6 +102,7 @@ class UserInformation(APIView):
 
         elif query_type == 'all':
             queryset = User.objects.all()
+            print (f"queryset: {queryset}")
             return Response(UserGetSerializer(instance=queryset, many=True).data)
 
         else:
