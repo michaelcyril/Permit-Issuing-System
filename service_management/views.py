@@ -18,7 +18,7 @@ class RequestPermitView(APIView):
         print(data)
         serialized = self.post_serializer_class(data=data)
         # print("ddddddddd")
-        
+
         if serialized.is_valid():
             # print(serialized.is_valid())
             serialized.save()
@@ -44,17 +44,21 @@ class ChangePermitStatusView(APIView):
         try:
             now = timezone.now()
             data = request.data
-            queryset = self.model.objects.get(id=data['id'])
-            if data['status'] == "PERMITED":
-                queryset.issued_by = self.user_model.objects.get(id=data['request_user'])
+            queryset = self.model.objects.get(id=data["id"])
+            if data["status"] == "PERMITED":
+                queryset.issued_by = self.user_model.objects.get(
+                    id=data["request_user"]
+                )
                 queryset.issued_at = now
-                queryset.status = data['status']
+                queryset.status = data["status"]
                 queryset.save()
-                
+
                 return Response({"change": True, "message": "Permit successful"})
-            elif data['status'] == "CANCELED":
-                queryset.canceled_by =  self.user_model.objects.get(id=data['request_user'])
-                queryset.status = data['status']
+            elif data["status"] == "CANCELED":
+                queryset.canceled_by = self.user_model.objects.get(
+                    id=data["request_user"]
+                )
+                queryset.status = data["status"]
                 queryset.canceled_at = now
                 queryset.save()
                 return Response({"change": True, "message": "Cancel successful"})
@@ -69,6 +73,45 @@ class ChangePermitStatusView(APIView):
 #     "request_user": "bccchcjj"
 #     "status": "bccchcjj"
 # }
+class ChangePermitPaymentStatusView(APIView):
+    model = Permit
+    user_model = User
+
+    def post(self, request):
+        try:
+            now = timezone.now()
+            data = request.data
+            print(f"Proccessing payment")
+
+            queryset = self.model.objects.get(id=data["id"])
+            queryset.payment = data["payment"]
+            queryset.save()
+            print(f"Paid and Saved")
+            return Response({"change": True, "message": "Cancel successful"})
+        except self.model.DoesNotExist:
+            return Response({"change": True})
+
+        #     if data["status"] == "PERMITED":
+        #         queryset.issued_by = self.user_model.objects.get(
+        #             id=data["request_user"]
+        #         )
+        #         queryset.issued_at = now
+        #         queryset.status = data["status"]
+        #         queryset.save()
+
+        #         return Response({"change": True, "message": "Permit successful"})
+        #     elif data["status"] == "CANCELED":
+        #         queryset.canceled_by = self.user_model.objects.get(
+        #             id=data["request_user"]
+        #         )
+        #         queryset.status = data["status"]
+        #         queryset.canceled_at = now
+        #         queryset.save()
+        #         return Response({"change": True, "message": "Cancel successful"})
+        #     else:
+        #         return Response({"change": False})
+        # except self.model.DoesNotExist:
+        #     return Response({"change": True})
 
 
 class GetPermitView(APIView):
@@ -79,7 +122,7 @@ class GetPermitView(APIView):
     def get(self, request):
         querset = self.model.objects.all()
         print("querset")
-        
+
         print(querset)
         serialized = self.get_serializer_class(instance=querset, many=True)
         return Response(serialized.data)
@@ -97,5 +140,3 @@ class GetPermitInformation(APIView):
             return Response({"errors": True, "data": serialized.data})
         except self.model.DoesNotExist:
             return Response({"errors": False})
-
-

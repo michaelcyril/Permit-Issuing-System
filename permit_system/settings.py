@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -103,6 +105,24 @@ DATABASES = {
     'CHARSET': 'UTF-8',
   }
 }
+## settings.py
+
+# DATABASES = {
+#   'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': 'permits',
+#     'USER': 'adammushy',
+#     'PASSWORD': '8cqEPHKPY_KhaDdTG1vVIg',
+#     'HOST': 'dour-fox-4678.g95.gcp-us-west2.cockroachlabs.cloud',
+#     'PORT': '26257',
+#     'OPTIONS': {'sslmode': 'require','client_encoding': 'UTF8'},
+#     'ATOMIC_REQUESTS': True,
+#     'CHARSET': 'UTF-8',
+#   }
+# }
+# other properties
+
+# DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'], engine='django_cockroachdb')}
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
