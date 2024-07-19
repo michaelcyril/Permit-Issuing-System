@@ -9,6 +9,7 @@ class PermitPostSerializer(serializers.ModelSerializer):
             'customer',
             'livestock_number',
             'permit_typec',
+            'transport',
             # 'issued_at'
         ]
 

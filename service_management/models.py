@@ -35,6 +35,7 @@ class Permit(models.Model):
     permit_typec = models.CharField(
         max_length=250, choices=PERMIT_TYPE, null=True, blank=True
     )
+    transport = models.CharField(max_length=250, null=True,)
     status = models.CharField(
         max_length=250, choices=STATUS, default="PENDING", null=True, blank=True
     )
