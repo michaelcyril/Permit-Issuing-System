@@ -29,7 +29,9 @@ class Permit(models.Model):
         max_length=100, default="NOT PAID", null=True, blank=True
     )
     livestock_number = models.IntegerField()
-    permit_number = models.CharField(max_length=250, null=True, blank=True)
+    permit_number = models.UUIDField(
+        unique=True, null=True, blank=True, default=uuid.uuid4
+    )
     permit_typec = models.CharField(
         max_length=250, choices=PERMIT_TYPE, null=True, blank=True
     )
