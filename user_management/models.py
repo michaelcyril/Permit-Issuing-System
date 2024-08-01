@@ -18,7 +18,7 @@ class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(unique=True)
-    nida_no = models.CharField(max_length=100, unique=True,null=True)
+    nida_no = models.CharField(max_length=100, unique=True,null=True,default="nida no",blank=True)
     phone = models.CharField(max_length=12, unique=True)
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
