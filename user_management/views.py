@@ -17,21 +17,21 @@ class RegisterUser(APIView):
 
     def post(self, request):
         data = request.data
-        user_detail = load_user(national_id=data["nida"])
-        print(f"Data ::{data}")
-        print(f" NIDA info :: {user_detail}")
-        print(f"NIDA info name :: {user_detail['Firstname']} {user_detail['Middlename']} {user_detail['Surname']}")
+        # user_detail = load_user(national_id=data["nida"])
+        # print(f"Data ::{data}")
+        # print(f" NIDA info :: {user_detail}")
+        # print(f"NIDA info name :: {user_detail['Firstname']} {user_detail['Middlename']} {user_detail['Surname']}")
         # user_detail.
-        data2 = {
-            "username": data["username"],
-            "email": data["email"],
-            "phone": data["phone"],
-            "firstname": user_detail["Firstname"],
-            "lastname": user_detail["Surname"],
-            "usertype": data["usertype"],
-            "nida": data["nida"],
-        }
-        print(f"new Data ::{data2}")
+        # data2 = {
+        #     "username": data["username"],
+        #     "email": data["email"],
+        #     "phone": data["phone"],
+        #     "firstname": user_detail["Firstname"],
+        #     "lastname": user_detail["Surname"],
+        #     "usertype": data["usertype"],
+        #     "nida": data["nida"],
+        # }
+        # print(f"new Data ::{data2}")
 
         serializer = UserSerializer(data=data)
         if serializer.is_valid():
